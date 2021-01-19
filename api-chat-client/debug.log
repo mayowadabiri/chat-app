@@ -1,0 +1,7 @@
+[1202/083633.168:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1203/084132.492:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\Dabiri Mayowa\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\d083ac1c-2d5f-422e-8eaf-0ae943418a2d: The system cannot find the path specified. (0x3)
+[1203/145543.863:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\Dabiri Mayowa\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\b6a5c8a0-6b85-4012-bc67-12d995d640a3: The system cannot find the path specified. (0x3)
+[1212/061751.361:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1213/110012.305:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[0102/071310.556:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[0104/203858.035:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
