@@ -8,6 +8,7 @@ const cors = require("cors");
 require("dotenv").config();
 // const io = require("./socket");
 const authRoutes = require("./routes/auth");
+const chatRoutes = require("./routes/chat");
 const userRoutes = require("./routes/user");
 const { SERVER_CONFIG, SERVER_ENDPOINT } = require("./helpers");
 
@@ -37,6 +38,7 @@ app.get("/", (req, res, next) => {
 
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/user", userRoutes);
+app.use("/api/v1/chat", chatRoutes);
 
 app.use((error, req, res, next) => {
   // console.log(error);

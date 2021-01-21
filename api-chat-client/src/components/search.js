@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const Search = ({ value, onchange, placeholder, type }) => {
+const Search = ({ value, onchange, placeholder, type, friends, onclick }) => {
   return (
     <div className="search">
       <input
@@ -10,22 +10,25 @@ const Search = ({ value, onchange, placeholder, type }) => {
         placeholder={placeholder}
         type={type}
       />
-      {/* <div className="search__result">
-        <div className="search__container">
-          <ul className="search__list">
-            <li className="search__item">
-              <Link className="search__link" to="/chat">
-                Dabiri Mayowa
-              </Link>
-            </li>
-            <li className="search__item">
-              <Link className="search__link" to="/chat">
-                Dabiri Mayowa
-              </Link>
-            </li>
-          </ul>
+      {friends.length > 0 ? (
+        <div className="search__result">
+          <div className="search__container">
+            <ul className="search__list">
+              {friends.map((friend) => (
+                <li
+                  className="search__item"
+                  key={friend._id}
+                  onClick={() => onclick(friend._id)}
+                >
+                  <button className="search__link">
+                    {`${friend.firstName} ${friend.lastName}`}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-      </div> */}
+      ) : null}
     </div>
   );
 };

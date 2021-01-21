@@ -172,7 +172,7 @@ html {
 }
 
 .search {
-  width: 90%;
+  width: 100%;
   margin: 1rem auto;
   position: relative;
 }
@@ -200,7 +200,7 @@ html {
 }
 .search__container {
   margin: auto;
-  width: 90%;
+  width: 100%;
   padding: 1rem 0 5rem 0;
 }
 .search__list {
@@ -216,13 +216,14 @@ html {
   margin-bottom: 1rem;
 }
 .search__link {
-  color: #f1efef;
+  color: black;
   text-decoration: none;
-  width: 85%;
+  width: 100%;
   margin: auto;
   display: block;
   font-size: 1.3rem;
   padding: 1rem;
+  cursor: pointer;
 }
 
 .link:link, .link:visited {

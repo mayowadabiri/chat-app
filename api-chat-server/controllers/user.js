@@ -2,13 +2,12 @@
 const User = require("../models/user");
 
 exports.searchUser = async (req, res, next) => {
-  console.log("reahec")
   try {
     const { user } = req.params;
     const result = await User.find().lean();
     const updated = result.filter((res) => {
       return (
-        res.name.toLowerCase().includes(user.toLowerCase()) ||
+        res.firstName.toLowerCase().includes(user.toLowerCase()) ||
         res.email.includes(user.toLowerCase())
       );
     });
@@ -32,3 +31,5 @@ exports.getUser = async (req, res, next) => {
     next(error);
   }
 };
+
+

@@ -73,9 +73,10 @@ export const login = (userData, props) => (dispatch) => {
     .post("/auth/login", userData)
     .then((result) => {
       const token = result.data.token;
+      const id = result.data.id;
       localStorage.setItem("token", token);
-      // localStorage.setItem("userID", jwtSign.id);
-      console.log(result.data)
+      localStorage.setItem("userID", id);
+      console.log(result.data);
       const payload = {
         token: result.data.token,
         userID: result.data.id,
@@ -112,12 +113,12 @@ export const logout = () => {
 //         accessToken: token,
 //         userID,
 //       };
-      // dispatch(loginSuccess(payload));
-      // dispatch(
-      //   checkAuthTimeout(
-      //     Math.ceil(expiresIn.getTime() - new Date().getTime()) / 1000
-      //   )
-      // );
+// dispatch(loginSuccess(payload));
+// dispatch(
+//   checkAuthTimeout(
+//     Math.ceil(expiresIn.getTime() - new Date().getTime()) / 1000
+//   )
+// );
 //     }
 //   }
 // };

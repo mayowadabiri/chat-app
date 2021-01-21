@@ -7,6 +7,7 @@ import url from "../../constants/axioscreate";
 
 const Friends = () => {
   const [friends, setFriends] = useState([]);
+  const [friendList, setFriendList] = useState([]);
   const [search, setSearch] = useState({
     type: "text",
     value: "",
@@ -14,15 +15,18 @@ const Friends = () => {
   });
 
   useEffect(() => {
-    url
-      .get(`/user/search=${search.value}`)
-      .then((res) => {
-        console.log(res.data.result)
-        setFriends(res.data.result);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (search.value !== "") {
+      setTimeout(() => {
+        url
+          .get(`/user/${search.value}`)
+          .then((res) => {
+            setFriends(res.data.result);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }, 5000);
+    }
   }, [search.value]);
 
   const handleChange = ({ target }) => {
@@ -30,6 +34,37 @@ const Friends = () => {
       ...search,
       value: target.value,
     });
+  };
+
+  const handleClick = (receiverID) => {
+    setSearch({
+      ...search,
+      value: "",
+    });
+    console.log(receiverID);
+    const user_id = localStorage.getItem("userID");
+    url
+      .get(`chat/${user_id}/${receiverID}`)
+      .then((res) => {
+        // console.log(res.data);
+        setFriendList((prevState) => [
+          ...prevState,
+          friends.find((friend) => {
+            const id = friendList.find((friend) => friend._id === receiverID);
+            if (id) {
+              return null;
+            } else {
+              return friend._id === receiverID;
+            }
+          }),
+        ]);
+      })
+      .then(() => {
+        setFriends([]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -40,13 +75,18 @@ const Friends = () => {
           placeholder={search.placeholder}
           type={search.type}
           onchange={handleChange}
+          friends={friends}
+          onclick={handleClick}
         />
       </div>
       <div className="friends__list">
-        <Friend />
-        <Friend />
-        <Friend />
-        <Friend />
+        {friendList
+          .filter((friend) => friend)
+          .map((friend) => (
+            <Friend key={friend._id}>
+              {`${friend.firstName} ${friend.lastName}`}{" "}
+            </Friend>
+          ))}
       </div>
     </div>
   );

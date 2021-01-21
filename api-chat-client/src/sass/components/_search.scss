@@ -1,5 +1,5 @@
 .search {
-  width: 90%;
+  width: 100%;
   margin: 1rem auto;
   position: relative;
   &__input {
@@ -32,7 +32,7 @@
 
   &__container {
   margin: auto;
-  width: 90%;
+  width: 100%;
   padding: 1rem 0 5rem 0;
   }
 
@@ -51,12 +51,13 @@
   }
 
   &__link {
-    color: $color-white;
+    color: black;
     text-decoration: none;
-    width: 85%;
+    width: 100%;
     margin: auto;
     display: block;
     font-size: 1.3rem;
     padding: 1rem;
+    cursor: pointer;
   }
 }

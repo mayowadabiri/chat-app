@@ -1,9 +1,9 @@
-const Friend = () =>{
-    return (
-        <div className="friends__item">
-            <p>Mayowa Dabiri </p>
-        </div>
-    )
-}
+const Friend = ({ children }) => {
+  return (
+    <div className="friends__item">
+      <p>{children}</p>
+    </div>
+  );
+};
 
-export default Friend
+export default Friend;
