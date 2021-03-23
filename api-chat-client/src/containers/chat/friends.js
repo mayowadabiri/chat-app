@@ -41,12 +41,10 @@ const Friends = () => {
       ...search,
       value: "",
     });
-    console.log(receiverID);
     const user_id = localStorage.getItem("userID");
     url
       .get(`chat/${user_id}/${receiverID}`)
       .then((res) => {
-        // console.log(res.data);
         setFriendList((prevState) => [
           ...prevState,
           friends.find((friend) => {
@@ -60,6 +58,7 @@ const Friends = () => {
         ]);
       })
       .then(() => {
+        console.log(friendList);
         setFriends([]);
       })
       .catch((error) => {

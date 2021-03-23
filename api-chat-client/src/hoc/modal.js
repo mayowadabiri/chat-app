@@ -2,7 +2,6 @@ import Loader from "../components/loader";
 
 const ModalComponent = (Component, loadingMessage) => {
   return function withLoader({ isLoading, ...props }) {
-    console.log(isLoading);
     if (!isLoading) return <Component {...props} />;
     return (
       <>

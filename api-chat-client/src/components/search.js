@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 const Search = ({ value, onchange, placeholder, type, friends, onclick }) => {
   return (

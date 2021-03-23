@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import io from "socket.io-client";
 import Friends from "./friends";
+import Message from "./message";
 
 const Dashboard = (props) => {
   useEffect(() => {
@@ -19,7 +20,19 @@ const Dashboard = (props) => {
           <aside className="dashboard__friend">
             <Friends />
           </aside>
-          <div className="dashboard__messages">kuewtdb8o7qwdgkiduliu</div>
+          <div className="dashboard__messages">
+            <div className="dashboard__messages-container">
+              <Message />
+              <div className="dashboard__messages-input">
+                <input
+                  type="text"
+                  // value=""
+                  className="input"
+                  placeholder="Type a message"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </main>

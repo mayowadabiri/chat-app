@@ -6,8 +6,5 @@ export const LOGIN__START = "LOGIN__START";
 export const LOGIN__SUCCESS = "LOGIN__SUCCESS";
 export const LOGIN__FAILED = "LOGIN__FAILED";
 
-// export const SET__INIT = "SET_INIT";
 
 export const LOGOUT__INIT = "LOGOUT_INIT";
-
-// exprt

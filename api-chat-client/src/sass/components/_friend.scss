@@ -1,12 +1,12 @@
 .friends {
   width: 100%;
   margin: auto auto auto auto;
-  height: 100%;
+  // height: 100%;
 
   &__list {
     margin-top: 2rem;
     // overflow-y: scroll;
-    height: 93.4%;
+    // height: 93.4%;
     &::-webkit-scrollbar {
       width: 5px;
       border-radius: 40px;
