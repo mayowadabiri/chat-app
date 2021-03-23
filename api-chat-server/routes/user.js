@@ -7,5 +7,7 @@ router.get("/:user", userController.searchUser)
 
 router.get("/:email", userController.getUser)
 
+router.put("/socket/:id", userController.saveScocketID)
+
 
 module.exports = router;

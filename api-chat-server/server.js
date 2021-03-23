@@ -3,7 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 // const socket = require("./socket");
-// const User = require("./models/user");
+const User = require("./models/user");
 // const Chat = require("./models/chat");
 require("dotenv").config();
 // const io = require("./socket");
@@ -34,6 +34,7 @@ app.use((req, res, next) => {
 
 app.get("/", (req, res, next) => {
   res.send("API server up and running");
+  res.end()
 });
 
 app.use("/api/v1/auth", authRoutes);
@@ -41,7 +42,7 @@ app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/chat", chatRoutes);
 
 app.use((error, req, res, next) => {
-  // console.log(error);
+  console.log(error);
   if (error.name !== "Error") {
     return res.status(500).json({
       message: "Error proceessing request",
@@ -54,6 +55,9 @@ app.use((error, req, res, next) => {
   });
 });
 
+
+// const chat = io.
+
 mongoose
   .connect(
     `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.0bj1i.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`,
@@ -64,8 +68,19 @@ mongoose
       console.log(`Server listening on ${SERVER_ENDPOINT}`);
     });
     const io = require("./constants/socket").init(server);
-    io.on("connection", (socket) =>{
-      console.log(socket.id)
+    const chat = io.of("/chat")
+    chat.on("connection", (socket) => {
+      socket.emit("socket id", socket.id)
+      // console.log(socket.id)
+     socket.on("private", async ({ msg, receiver }) => {
+       const user = await User.findOne({ _id: receiver });
+       console.log(socket.id)
+      //  console.log(user.socketID)
+      //  socket.join(user.socketID)
+       chat.to(user.socketID).to(socket.id).emit("private", ({
+         msg
+       }));
+     });
     })
   })
   .catch((error) => {

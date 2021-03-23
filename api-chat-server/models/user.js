@@ -23,7 +23,7 @@ const userSchema = new Schema(
       type: String,
     },
   },
-  { timestamps: true, autoIndex: true }
+  { timestamps: true, autoIndex: false }
 );
 
 module.exports = mongoose.model("User", userSchema);
