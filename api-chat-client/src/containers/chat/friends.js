@@ -1,11 +1,13 @@
 // @ts-nocheck
 import { useEffect } from "react";
 import { useState } from "react";
+import { connect } from "react-redux";
 import Friend from "../../components/friend.js";
 import Search from "../../components/search.js";
 import url from "../../constants/axioscreate";
+import { getSocketID } from "../../store/actions/chat.js";
 
-const Friends = () => {
+const Friends = ({ getSocket }) => {
   const [friends, setFriends] = useState([]);
   const [friendList, setFriendList] = useState([]);
   const [search, setSearch] = useState({
@@ -36,11 +38,12 @@ const Friends = () => {
     });
   };
 
-  const handleClick = (receiverID) => {
+  const handleClick = (receiverID, socketID) => {
     setSearch({
       ...search,
       value: "",
     });
+    getSocket(receiverID);
     const user_id = localStorage.getItem("userID");
     url
       .get(`chat/${user_id}/${receiverID}`)
@@ -56,10 +59,10 @@ const Friends = () => {
             }
           }),
         ]);
+        setFriends([]);
       })
       .then(() => {
         console.log(friendList);
-        setFriends([]);
       })
       .catch((error) => {
         console.log(error);
@@ -82,7 +85,7 @@ const Friends = () => {
         {friendList
           .filter((friend) => friend)
           .map((friend) => (
-            <Friend key={friend._id}>
+            <Friend key={friend._id} f={friend}>
               {`${friend.firstName} ${friend.lastName}`}{" "}
             </Friend>
           ))}
@@ -91,4 +94,12 @@ const Friends = () => {
   );
 };
 
-export default Friends;
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    getSocket: (id) => {
+      dispatch(getSocketID(id));
+    },
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Friends);

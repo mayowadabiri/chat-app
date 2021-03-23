@@ -8,3 +8,7 @@ export const LOGIN__FAILED = "LOGIN__FAILED";
 
 
 export const LOGOUT__INIT = "LOGOUT_INIT";
+
+
+
+export const GET__SOCKETID = "GET__SOCKETID"

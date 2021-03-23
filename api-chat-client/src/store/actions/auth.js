@@ -1,7 +1,7 @@
 // @ts-nocheck
 import * as actionTypes from "../types";
 import axios from "../../constants/axioscreate";
-// import jwt from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 
 export const registerStart = () => {
   return {
@@ -98,30 +98,25 @@ export const logout = () => {
   };
 };
 
-// export const checkAuth = () => (dispatch) => {
-//   const token = localStorage.getItem("token");
-//   if (!token) {
-//     dispatch(logout());
-//   } else {
-//     const expiresIn = jwt.decode(token).exp;
-//     if (new Date(expiresIn * 1000) < new Date()) {
-//       console.log(true);
-//       dispatch(logout());
-//     } else {
-//       const userID = localStorage.getItem("userID");
-//       const payload = {
-//         accessToken: token,
-//         userID,
-//       };
-// dispatch(loginSuccess(payload));
-// dispatch(
-//   checkAuthTimeout(
-//     Math.ceil(expiresIn.getTime() - new Date().getTime()) / 1000
-//   )
-// );
-//     }
-//   }
-// };
+export const checkAuth = () => (dispatch) => {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    dispatch(logout());
+  } else {
+    const expiresIn = jwt.decode(token).exp;
+    if (new Date(expiresIn * 1000) < new Date()) {
+      console.log(true);
+      dispatch(logout());
+    } else {
+      const userID = localStorage.getItem("userID");
+      const payload = {
+        accessToken: token,
+        userID,
+      };
+      dispatch(loginSuccess(payload));
+    }
+  }
+};
 
 // export const setInit = () => {
 //   return {

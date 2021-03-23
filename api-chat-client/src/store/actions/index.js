@@ -2,8 +2,10 @@ export {
     registerUser,
     login,
     logout,
-    // checkAuth,
+    checkAuth,
     // setInit
 } from "./auth";
+
+export {getSocketID} from "./chat"
 
 // export { createTestimony } from "./testimony";

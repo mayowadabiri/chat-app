@@ -1,18 +1,43 @@
 // @ts-nocheck
-import { useEffect } from "react";
-import io from "socket.io-client";
+import { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import axiosURL from "../../constants/axioscreate";
 import Friends from "./friends";
 import Message from "./message";
+import socket from "../../socket"
 
-const Dashboard = (props) => {
+
+
+
+const Dashboard = ({ userID, socketID, receiverID }) => {
+  const [message, setMessage] = useState("");
+
   useEffect(() => {
-    const socket = io("http://localhost:8000/chat", {
-      withCredentials: true,
+    if (userID !== null) {
+     
+      axiosURL
+        .put(`/user/socket/${socketID}`, { user: userID })
+        .then((res) => console.log(res.data))
+        .catch((err) => console.log(err.response));
+    }
+    // });
+  }, [userID]);
+
+  const handleSubmit = (evt) => {
+    if (evt.key === "Enter" && message !== "" && receiverID !== null) {
+      socket.emit("private", {
+        msg: message,
+        receiver: receiverID,
+      });
+    }
+  };
+
+  useEffect(() => {
+    socket.on("private", (args) => {
+      console.log(args);
     });
-    socket.on("connect", () => {
-      console.log(socket.id);
-    });
-  });
+  }, []);
+
   return (
     <main className="dashboard">
       <div className="dashboard__container">
@@ -26,9 +51,11 @@ const Dashboard = (props) => {
               <div className="dashboard__messages-input">
                 <input
                   type="text"
-                  // value=""
+                  value={message}
+                  onChange={(event) => setMessage(event.target.value)}
                   className="input"
                   placeholder="Type a message"
+                  onKeyPress={handleSubmit}
                 />
               </div>
             </div>
@@ -39,4 +66,11 @@ const Dashboard = (props) => {
   );
 };
 
-export default Dashboard;
+const mapStateToProps = (state) => {
+  // console.log(state.auth);
+  return {
+    userID: state.auth.userID,
+    receiverID: state.chat.id,
+  };
+};
+export default connect(mapStateToProps)(Dashboard);

@@ -18,7 +18,7 @@ const Search = ({ value, onchange, placeholder, type, friends, onclick }) => {
                 <li
                   className="search__item"
                   key={friend._id}
-                  onClick={() => onclick(friend._id)}
+                  onClick={() => onclick(friend._id, friend.socketID)}
                 >
                   <button className="search__link">
                     {`${friend.firstName} ${friend.lastName}`}

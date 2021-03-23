@@ -9,9 +9,11 @@ import reportWebVitals from "./reportWebVitals";
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import thunk from "redux-thunk";
 import authReducer from "./store/reducers/auth";
+import chatReducer from "./store/reducers/chat";
 
 const rootReducers = combineReducers({
   auth: authReducer,
+  chat: chatReducer
 });
 
 const composeEnhancers =
@@ -36,3 +38,5 @@ ReactDOM.render(
 );
 
 reportWebVitals();
+
+
